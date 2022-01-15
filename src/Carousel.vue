@@ -659,19 +659,14 @@ export default {
       return this.currentHeight;
     },
     /**
-     * Filter slot contents to slide instances and return length
+     * Count the number of slide instances
      * @return {Number} The number of slides
      */
     getSlideCount() {
-      this.slideCount =
-        (this.$slots &&
-          this.$slots.default &&
-          this.$slots.default.filter(
-            slot =>
-              slot.tag &&
-              slot.tag.match(`^vue-component-\\d+-${this.tagName}$`) !== null
-          ).length) ||
-        0;
+      // Previously this used this.$slots to count the number of slides, but I couldn't 
+      // get it working with the Vue 3 migration build. This achieves the same effect 
+      // and is simpler.
+      this.slideCount = this.$el.querySelectorAll('.VueCarousel-slide').length;
     },
     /**
      * Gets the slide at the specified index
