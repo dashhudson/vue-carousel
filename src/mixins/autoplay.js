@@ -35,7 +35,7 @@ const autoplay = {
     };
   },
   destroyed() {
-    if (!this.$isServer) {
+    if (!this.isServer) {
       this.$el.removeEventListener("mouseenter", this.pauseAutoplay);
       this.$el.removeEventListener("mouseleave", this.startAutoplay);
     }
@@ -63,12 +63,17 @@ const autoplay = {
     }
   },
   mounted() {
-    if (!this.$isServer && this.autoplayHoverPause) {
+    if (!this.isServer && this.autoplayHoverPause) {
       this.$el.addEventListener("mouseenter", this.pauseAutoplay);
       this.$el.addEventListener("mouseleave", this.startAutoplay);
     }
 
     this.startAutoplay();
+  },
+  computed: {
+    isServer() {
+      return typeof window === 'undefined';
+    }
   }
 };
 

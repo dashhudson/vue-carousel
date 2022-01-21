@@ -25,7 +25,7 @@ export default {
   },
   inject: ["carousel"],
   mounted() {
-    if (!this.$isServer) {
+    if (!this.isServer) {
       this.$el.addEventListener("dragstart", e => e.preventDefault());
     }
 
@@ -81,6 +81,9 @@ export default {
     isAdjustableHeight() {
       const { adjustableHeight } = this.carousel;
       return adjustableHeight;
+    },
+    isServer() {
+      return typeof window === 'undefined';
     }
   },
   methods: {

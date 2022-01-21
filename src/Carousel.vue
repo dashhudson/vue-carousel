@@ -436,7 +436,7 @@ export default {
      * @return {Number} The number of slides per page to display
      */
     currentPerPage() {
-      return !this.perPageCustom || this.$isServer
+      return !this.perPageCustom || this.isServer
         ? this.perPage
         : this.breakpointSlidesPerPage;
     },
@@ -512,6 +512,9 @@ export default {
     padding() {
       const padding = this.spacePadding;
       return padding > 0 ? padding : false;
+    },
+    isServer() {
+      return typeof window === 'undefined';
     }
   },
   methods: {
